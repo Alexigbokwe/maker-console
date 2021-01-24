@@ -1,6 +1,6 @@
 {
   "name": "maker-console",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Maker is the command line interface included for ExpressWebJs. Maker exists at the root of your application as the maker script and provides a number of helpful commands that can assist you while you build your application. To view a list of all available Maker commands, you may use the help command.",
   "main": "index.js",
   "scripts": {
