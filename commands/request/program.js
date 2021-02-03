@@ -40,7 +40,7 @@ class RequestProgram {
 
   static [generateRequest](name) {
     let body = `"use strict";
-        const FormRequest = require("@elucidate/formRequest");
+        const FormRequest = require("@elucidate/FormRequest");
 
         class ${name} extends FormRequest{
           /**

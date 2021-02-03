@@ -32,7 +32,7 @@ class AuthProgram {
         "./Routes/authRoute/index.js",
       );
       if (doesFileExist == false) {
-        this[appendRoute]();
+        await this[appendRoute]();
       } else {
         spinner.color = "red";
         spinner.text = "failed";
@@ -44,7 +44,7 @@ class AuthProgram {
     }
   }
 
-  static [appendRoute]() {
+  static async [appendRoute]() {
     fs.appendFile(
       "./Routes/authRoute/index.js",
       this[routeBody](),
@@ -157,7 +157,9 @@ class AuthProgram {
 
   static [generateSqlModel]() {
     let body = `"use strict";
-    class User extends DB_MODEL {
+    const Model = require("@elucidate/Model");
+
+    class User extends Model {
       static get tableName() {
         return "users";
       }
