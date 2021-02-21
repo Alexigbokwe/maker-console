@@ -1,4 +1,6 @@
 "use strict";
+require("../expresswebcore/alias");
+require("../expresswebcore/Database/src/index");
 const pathTo = process.env.PWD;
 const program = require("commander");
 program.version("1.0.0").description("ExpressWebJs Command Line");
