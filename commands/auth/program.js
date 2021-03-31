@@ -55,14 +55,15 @@ class AuthProgram {
           spinner.fail("");
           BaseCommand.error(err.errno);
           return false;
+        } else {
+          spinner.color = "green";
+          spinner.text = "Completed";
+          spinner.succeed("Completed 😊😘");
+          BaseCommand.success(
+            "Authentication route successfully generated in App/Routes/authRoute folder",
+          );
+          return true; 
         }
-        spinner.color = "green";
-        spinner.text = "Completed";
-        spinner.succeed("Completed 😊😘");
-        BaseCommand.success(
-          "Authentication route successfully generated in App/Routes/authRoute folder",
-        );
-        return true;
       },
     );
   }

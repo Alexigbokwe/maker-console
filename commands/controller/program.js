@@ -48,6 +48,7 @@ class ControllerProgram {
 
   static async [controllerBody](controllerName) {
     let body = `"use strict";
+    const Response = require("../../Utils/HttpResponse");
 
         class ${controllerName}{
           //
@@ -61,6 +62,7 @@ class ControllerProgram {
   static async [controllerBodyWithResource](controllerName) {
     let body =
       `"use strict";
+      const Response = require("../../Utils/HttpResponse");
 
         class ` +
       controllerName +
