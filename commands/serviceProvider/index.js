@@ -5,7 +5,7 @@ class providerCommand {
   static async handle(program) {
     await program
       .command("make-provider [providerName]")
-      .description("Create a new job class")
+      .description("Create new service provider class")
       .action((providerName) => {
         providerProgram.handle(providerName);
       });
