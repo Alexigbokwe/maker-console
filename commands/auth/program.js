@@ -100,7 +100,7 @@ class AuthProgram {
   }
 
   static async [nextStep](generateModel) {
-    fs.appendFile("./App/Model/User_model.js", generateModel, function (err) {
+    fs.appendFile("./App/Model/User_model.js", generateModel, async function (err) {
       if (err) {
         spinner.color = "red";
         spinner.text = "failed";
