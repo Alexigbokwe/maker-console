@@ -14,8 +14,7 @@ const appendRoute = Symbol("appendRoute");
 
 class AuthProgram {
   static async handle() {
-    let status = await this[createModel]();
-    if (status != false) await this[createAuthRoute]();
+    await this[createModel]();
   }
 
   static [checkDatabaseDriver]() {
@@ -28,44 +27,34 @@ class AuthProgram {
     spinner.text = "Generating Authentication route";
     let checkFolder = BaseCommand.checkFolderExists("./Routes/authRoute");
     if (checkFolder) {
-      let doesFileExist = await BaseCommand.checkFileExists(
-        "./Routes/authRoute/index.js",
-      );
+      let doesFileExist = await BaseCommand.checkFileExists("./Routes/authRoute/index.js");
       if (doesFileExist == false) {
         await this[appendRoute]();
       } else {
         spinner.color = "red";
         spinner.text = "failed";
         spinner.fail("");
-        return await BaseCommand.error(
-          "Authentication routes already exist in App/Routes/authRoute folder.",
-        );
+        return await BaseCommand.error("Authentication routes already exist in App/Routes/authRoute folder.");
       }
     }
   }
 
   static async [appendRoute]() {
-    fs.appendFile(
-      "./Routes/authRoute/index.js",
-      this[routeBody](),
-      function (err) {
-        if (err) {
-          spinner.color = "red";
-          spinner.text = "failed";
-          spinner.fail("");
-          BaseCommand.error(err.errno);
-          return false;
-        } else {
-          spinner.color = "green";
-          spinner.text = "Completed";
-          spinner.succeed("Completed 😊😘");
-          BaseCommand.success(
-            "Authentication route successfully generated in App/Routes/authRoute folder",
-          );
-          return true; 
-        }
-      },
-    );
+    fs.appendFile("./Routes/authRoute/index.js", this[routeBody](), function (err) {
+      if (err) {
+        spinner.color = "red";
+        spinner.text = "failed";
+        spinner.fail("");
+        BaseCommand.error(err.errno);
+        return false;
+      } else {
+        spinner.color = "green";
+        spinner.text = "Completed";
+        spinner.succeed("Completed 😊😘");
+        BaseCommand.success("Authentication route successfully generated in App/Routes/authRoute folder");
+        return true;
+      }
+    });
   }
 
   static [routeBody]() {
@@ -97,13 +86,9 @@ class AuthProgram {
     spinner.text = "Generating Authentication";
     let checkFolder = BaseCommand.checkFolderExists("./App/Model");
     if (checkFolder) {
-      let doesFileExist = await BaseCommand.checkFileExists(
-        "./App/Model/User_model.js",
-      );
+      let doesFileExist = await BaseCommand.checkFileExists("./App/Model/User_model.js");
       if (doesFileExist == false) {
-        return this[checkDatabaseDriver]() == "nosql"
-          ? await this[nextStep](this[generateNoSqlModel]())
-          : await this[nextStep](this[generateSqlModel]());
+        return this[checkDatabaseDriver]() == "nosql" ? await this[nextStep](this[generateNoSqlModel]()) : await this[nextStep](this[generateSqlModel]());
       } else {
         spinner.color = "red";
         spinner.text = "failed";
@@ -126,9 +111,8 @@ class AuthProgram {
       spinner.color = "green";
       spinner.text = "Completed";
       spinner.succeed("Completed 😊😘");
-      BaseCommand.success(
-        "User_model.js class successfully generated in App/Model folder",
-      );
+      BaseCommand.success("User_model.js class successfully generated in App/Model folder");
+      await this[createAuthRoute]();
       return true;
     });
   }
